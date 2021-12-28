@@ -70,7 +70,7 @@ func main() {
 		now := time.Now()
 		diff := now.Sub(cacheInfo.ModTime())
 		if diff > (time.Duration(600) * time.Second) {
-			fetchUri := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=Moose%20Lake,MN,US&appid=%s&units=imperial", apiKey)
+			fetchUri := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=Moose Lake,MN,US&appid=%s&units=imperial", apiKey)
 			restClient := resty.New()
 			resp, resperr := restClient.R().
 				Get(fetchUri)
@@ -97,7 +97,7 @@ func main() {
 			}
 		}
 	} else {
-		fetchUri := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=Moose%20Lake,MN,US&appid=%s&units=imperial", apiKey)
+		fetchUri := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?q=Moose Lake,MN,US&appid=%s&units=imperial", apiKey)
 		restClient := resty.New()
 		resp, resperr := restClient.R().
 			Get(fetchUri)
@@ -116,8 +116,36 @@ func main() {
 		cacheIndicator = ""
 	}
 
+	indicator := "☀️"
+	switch cw.Weather[0].Main {
+	case "Thunderstorm":
+		indicator = "⛈"
+	case "Drizzle":
+		indicator = "🌦"
+	case "Rain":
+		indicator = "🌧"
+	case "Snow":
+		indicator = "🌨"
+	case "Tornado":
+		indicator = "🌪"
+	case "Fog":
+		indicator = "💨"
+	case "Clouds":
+		if cw.Weather[0].ID == 801 {
+			indicator = "🌤"
+		}
+		if cw.Weather[0].ID == 802 {
+			indicator = "⛅️"
+		}
+		if cw.Weather[0].ID == 803 {
+			indicator = "🌥"
+		}
+		if cw.Weather[0].ID == 804 {
+			indicator = "☁️"
+		}
+	}
 	celsiusMainTemp := convertToCelsius(cw.Main.Temp)
-	fmt.Printf("%.2fF/%.2fC (%.2fF)%s", cw.Main.Temp, celsiusMainTemp, cw.Main.FeelsLike, cacheIndicator)
+	fmt.Printf("%.2fF/%.2fC (%.2fF)%s %s", cw.Main.Temp, celsiusMainTemp, cw.Main.FeelsLike, cacheIndicator, indicator)
 }
 
 // initConfig reads in config file and ENV variables if set.
