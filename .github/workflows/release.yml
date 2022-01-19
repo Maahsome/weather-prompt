@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+    - main
+
+jobs:
+  changelog-create:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      -
+        name: Run ChangeLog-PR
+        uses: Maahsome/changelog-pr-action@v1
+
