@@ -16,5 +16,5 @@ jobs:
           fetch-depth: 0
       -
         name: Run ChangeLog-PR
-        uses: Maahsome/changelog-pr-action@v1
+        uses: Maahsome/changelog-pr-action@v1.0
 
