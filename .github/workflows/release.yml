@@ -23,6 +23,7 @@ jobs:
         with:
           previoustag: v0.0.1
           token: ${{ secrets.GITHUB_TOKEN }}
+          verbose: debug
       - 
         name: Get Artifact
         uses: actions/download-artifact@v2
