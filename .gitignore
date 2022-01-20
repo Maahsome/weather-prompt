@@ -5,7 +5,7 @@
 *.so
 *.dylib
 weather-prompt
-v0.0.0-NEXT.md
+vRELEASE.md
 
 # Test binary, built with `go test -c`
 *.test
