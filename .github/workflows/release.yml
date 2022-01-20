@@ -21,7 +21,7 @@ jobs:
         name: Run ChangeLog-PR
         uses: Maahsome/changelog-pr-action@v1.0
         with:
-          previoustag: ${PREVIOUS_TAG}
+          previoustag: v0.0.1
           token: ${{ secrets.GITHUB_TOKEN }}
       - 
         name: Get Artifact
