@@ -14,7 +14,20 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      - 
+        name: Set PREVIOUS TAG 
+        run: echo PREVIOUS_TAG=v0.0.1
       -
         name: Run ChangeLog-PR
         uses: Maahsome/changelog-pr-action@v1.0
-
+        with:
+          previoustag: ${PREVIOUS_TAG}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - 
+        name: Get Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: v0.0.0-NEXT
+      -
+        name: CAT File
+        run: cat v0.0.0-NEXT.md
