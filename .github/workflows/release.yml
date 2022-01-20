@@ -21,9 +21,10 @@ jobs:
         name: Run ChangeLog-PR
         uses: Maahsome/changelog-pr-action@v1.0
         with:
-          previoustag: v0.0.1
+          previous_tag: v0.0.1
           token: ${{ secrets.GITHUB_TOKEN }}
-          verbose: debug
+          verbose_level: info
+          changelog_dir: changelog
       - 
         name: Get Artifact
         uses: actions/download-artifact@v2
@@ -32,9 +33,9 @@ jobs:
       -
         name: CAT File
         run: |
-          cat v0.0.0-NEXT.md
-          cp v0.0.0-NEXT.md changelog/v0.0.0-NEXT.md
-      - name: Commit ChangeLog
+          cat changelog/v0.0.0-NEXT.md
+      - 
+        name: Commit ChangeLog
         uses: EndBug/add-and-commit@v7
         with:
           add: 'changelog/v0.0.0-NEXT.md'
