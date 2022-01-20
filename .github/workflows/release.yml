@@ -31,4 +31,14 @@ jobs:
           name: v0.0.0-NEXT
       -
         name: CAT File
-        run: cat v0.0.0-NEXT.md
+        run: |
+          cat v0.0.0-NEXT.md
+          cp v0.0.0-NEXT.md changelog/v0.0.0-NEXT.md
+      - name: Commit ChangeLog
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: 'changelog/v0.0.0-NEXT.md'
+          committer_name: Christopher Maahs
+          committer_email: cmaahs@gmail.com
+          message: 'Update v0.0.0-NEXT.md running changelog'
+
